@@ -12,22 +12,31 @@
 		.media-content {
 			text-align: right;
 		}
+		.table th,
+		.table td {
+			text-align: right;
+		}
 	</style>
 </head>
 <body>
 
 <div class="container">
+	@if (request()->view == 'table')
+		<a href="?view=cards" class="button is-primary is-pulled-left">תצוגת כרטיסים</a>
+	@else
+		<a href="?view=table" class="button is-primary is-pulled-left">תצוגת טבלה</a>
+	@endif
+
 	<h1 class="title is-1">כותרות אחרונות</h1>
 	<h5 class="title is-5">עדכון אחרון: {{ $headlines->first()->created_at->diffForHumans() }}</h5>
-	<div class="columns is-multiline">
-		@foreach ($headlines->chunk(3) as $chunks)
-			@foreach ($chunks as $headline)
-				<div class="column is-one-third">
-					@include ('headlines.card')
-				</div>
-			@endforeach
-		@endforeach
-	</div>
+
+	@if (request()->view == 'table')
+		@include ('headlines.table')
+	@else
+		@include ('headlines.cards')
+	@endif
+
+	{{ $headlines->appends(request()->only('view'))->links() }}
 </div>
 
 </body>

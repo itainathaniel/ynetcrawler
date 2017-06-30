@@ -10,7 +10,7 @@ class HeadlineController extends Controller
     
     public function index()
     {
-    	$headlines = Headline::latest()->get();
+    	$headlines = Headline::latest()->paginate(50);
 
     	return view('headlines.index')
     		->withHeadlines($headlines);

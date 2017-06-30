@@ -8,7 +8,7 @@
     <div class="media">
       <div class="media-content">
         <p class="title is-4">{{ $headline->title }}</p>
-        <p class="subtitle is-6">{{ $headline->created_at->format('d/m/Y H:i') }}</p>
+        <p class="subtitle is-6">{{ $headline->created_at->format('d/m H:i') }}</p>
       </div>
     </div>
 
